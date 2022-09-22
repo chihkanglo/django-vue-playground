@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Polls{% endblock title %}
+{% block app_title %}Polls{% endblock app_title %}
+
+{% block vue %}
+<div id="content" class="surface-ground overflow-auto h-full">
+    <p-dataview :value="latestQuestionList" layout="list" class="border-round-3xl overflow-hidden">
+        <template #list="slotProps">
+            
+            <div class="w-full p-4">
+                <span class="text-500">Question [[ slotProps.index + 1 ]]: </span><br />
+                <a :href="`/polls/${slotProps.data.id}`">
+                    <span class="text-primary font-bold text-lg">[[ slotProps.data.question_text ]]</span><br />
+                </a>
+                <div class="text-500 text-right text-sm">Created At: [[ new Date(slotProps.data.pub_date).toLocaleString() ]]</div>
+            </div>
+            
+        </template>
+    </p-dataview>
+</div>
+
+<script src="https://unpkg.com/primevue@^3/dataview/dataview.min.js"></script>
+<script>
+    const latestQuestionList = {{ latestQuestionList | safe }}
+
+    VueApp({
+        components: {
+            'p-button': primevue.button,
+            'p-dataview': primevue.dataview,
+            'p-dataviewlayoutoptions': primevue.dataviewlayoutoptions,
+        },
+        data: () => ({
+            latestQuestionList
+        })
+    }, '#content')
+    
+</script>
+{% endblock vue %}

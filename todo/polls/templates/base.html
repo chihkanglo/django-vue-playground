@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Kubeos - {% block title %}My App{% endblock %}</title>
+    
+    <link href="https://unpkg.com/primevue/resources/themes/lara-light-indigo/theme.css" rel="stylesheet">
+    <link href="https://unpkg.com/primevue/resources/primevue.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.css">
+
+    
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/primevue/core/core.min.js"></script>
+    
+    <script>
+        VueApp = (config, el) => {
+            Vue.createApp({
+                compilerOptions: {
+                    delimiters: ["[[", "]]"]
+                },
+                ...config
+            }).mount(el);
+        }
+    </script>
+</head>
+
+<body class="m-0">
+    <div id="app" class="w-full h-screen overflow-hidden">
+        <div id="navbar" class="flex sticky top-0 z-2 flex-row p-4 align-items-center w-full h-5rem shadow-1" style="backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.9);">
+            <div id="app-logo"><span class="text-primary text-xl font-bold">Kube<span class="text-400">os</span></span></div>
+            <i class="pi pi-angle-right p-2"></i>
+            <span class="font-bold text-700">
+                {% block app_title %}{% endblock app_title %}
+            </span> 
+        </div>
+        {% block vue %}{% endblock vue %}
+    </div>
+    <script>
+    </script>
+    
+</body>
+</html>

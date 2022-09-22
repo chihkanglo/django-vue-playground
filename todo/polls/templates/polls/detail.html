@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Polls{% endblock title %}
+{% block app_title %}Polls: {{ question }}{% endblock app_title %}
+
+{% block vue %}
+
+<div id="content" class="surface-ground h-full overflow-hidden">
+    <div class="m-4 p-2 border-round-3xl bg-white">
+        Question: {{ question }}
+        <br />
+        CreatedAt: {{ question.pub_date }}
+    </div>
+    
+    <p-button class="m-4" label="Back" @click="goBack"></p-button>
+    <p-button class="m-4" label="Result" @click="goResult"></p-button>
+</div>
+
+
+<script>
+    VueApp({
+        components: {'p-button': primevue.button},
+        methods: {
+            goBack() {
+                history.back();
+            },
+            goResult() {
+                location.href = '/polls/' + {{ question.id }} + '/results'
+            }
+        }
+    }, '#content')
+</script>
+{% endblock vue %}
